@@ -159,14 +159,18 @@ def train():
 
             # print info
             if iter_i % print_every == 0:
-
+                
                 # print main loss, lr, and optional stuff defined by the model
                 writer.add_scalar('train/loss', loss.item(), iter_i)
                 cur_lr = scheduler.optimizer.param_groups[0]["lr"]
                 writer.add_scalar('train/lr', cur_lr, iter_i)
 
+                wandb.log({'train/loss': loss.item(), 
+                       'train/lr': cur_lr,})
+                
                 for k, v in loss_optional.items():
                     writer.add_scalar('train/%s' % k, v, iter_i)
+                    wandb.log('train/%s' % k, v)
 
                 # print info to console
                 loss_str = "%.4f" % loss.item()
