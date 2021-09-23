@@ -171,7 +171,7 @@ def train():
                 
                 for k, v in loss_optional.items():
                     writer.add_scalar('train/%s' % k, v, iter_i)
-                    wandb.log('train/%s' % k, v)
+                    wandb.log({'train/%s' % k: v})
 
                 # print info to console
                 loss_str = "%.4f" % loss.item()
