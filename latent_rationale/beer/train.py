@@ -22,7 +22,7 @@ from latent_rationale.beer.evaluate import \
     evaluate_rationale, get_examples, evaluate_loss
 from latent_rationale.common.util import make_kv_string
 wandb.login()
-wandb.init(name="bastings_0")
+wandb.init(project="my-test-project", name="bastings_0")
 
 def train():
     """
