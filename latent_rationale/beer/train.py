@@ -222,6 +222,7 @@ def train():
 
                 for k, v in dev_eval.items():
                     writer.add_scalar('dev/' + k, v, iter_i)
+                    wandb.log({'dev/' + k : v})
 
                 test_eval = evaluate_loss(
                     model, test_data, batch_size=eval_batch_size,
@@ -229,6 +230,7 @@ def train():
 
                 for k, v in test_eval.items():
                     writer.add_scalar('test/' + k, v, iter_i)
+                    wand.log({'test/' + k, v})
 
                 # compute precision for models that have z
                 if hasattr(model, "z"):
@@ -240,8 +242,10 @@ def train():
                         device=device, path=path, batch_size=eval_batch_size)
                     writer.add_scalar('test/precision',
                                       test_precision, iter_i)
+                    wandb.log({'test/precision': test_precision})
                     writer.add_scalar('test/macro_precision',
                                       test_macro_prec, iter_i)
+                    wandb.log({'test/macro_precision': test_macro_prec})
                     test_eval["precision"] = test_precision
                     test_eval["macro_precision"] = test_macro_prec
                 else:
@@ -270,9 +274,11 @@ def train():
 
                     for k, v in dev_eval.items():
                         writer.add_scalar('best/dev/' + k, v, iter_i)
+                        wandb.log({'best/dev/' + k, v})
 
                     for k, v in test_eval.items():
                         writer.add_scalar('best/test/' + k, v, iter_i)
+                        wandb.log({'best/test/' + k, v})
 
                     ckpt = {
                         "state_dict": model.state_dict(),
@@ -352,3 +358,4 @@ def train():
 
 if __name__ == "__main__":
     train()
+    wandb.finish()
