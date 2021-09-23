@@ -230,6 +230,7 @@ def train():
 
                 for k, v in test_eval.items():
                     writer.add_scalar('test/' + k, v, iter_i)
+                    print(v, type(v))
                     wandb.log({'test/' + k, v})
 
                 # compute precision for models that have z
