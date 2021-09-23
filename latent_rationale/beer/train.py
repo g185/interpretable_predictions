@@ -230,7 +230,7 @@ def train():
 
                 for k, v in test_eval.items():
                     writer.add_scalar('test/' + k, v, iter_i)
-                    wand.log({'test/' + k, v})
+                    wandb.log({'test/' + k, v})
 
                 # compute precision for models that have z
                 if hasattr(model, "z"):
