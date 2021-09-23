@@ -2,7 +2,7 @@ import os
 import time
 import datetime
 import json
-
+import wandb
 import torch
 import torch.optim
 from torch.optim import Adam
@@ -21,7 +21,7 @@ from latent_rationale.beer.util import \
 from latent_rationale.beer.evaluate import \
     evaluate_rationale, get_examples, evaluate_loss
 from latent_rationale.common.util import make_kv_string
-
+wandb.login()
 
 def train():
     """
