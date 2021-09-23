@@ -230,8 +230,7 @@ def train():
 
                 for k, v in test_eval.items():
                     writer.add_scalar('test/' + k, v, iter_i)
-                    print(v, type(v))
-                    wandb.log({'test/' + k, v})
+                    wandb.log({'test/' + k: v})
 
                 # compute precision for models that have z
                 if hasattr(model, "z"):
@@ -275,11 +274,11 @@ def train():
 
                     for k, v in dev_eval.items():
                         writer.add_scalar('best/dev/' + k, v, iter_i)
-                        wandb.log({'best/dev/' + k, v})
+                        wandb.log({'best/dev/' + k: v})
 
                     for k, v in test_eval.items():
                         writer.add_scalar('best/test/' + k, v, iter_i)
-                        wandb.log({'best/test/' + k, v})
+                        wandb.log({'best/test/' + k: v})
 
                     ckpt = {
                         "state_dict": model.state_dict(),
