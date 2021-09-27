@@ -64,9 +64,15 @@ class Classifier(nn.Module):
         # apply z to main inputs
         if z is not None:
             z_mask = (mask.float() * z).unsqueeze(-1)  # [B, T, 1]
+            
+            print("z_mask", z_mask)
+            print("embed", emb)
             rnn_mask = z_mask.squeeze(-1) > 0.  # z could be continuous
             emb = emb * z_mask
-
+        
+        print("rnn_mask", rnn_mask)
+        print("embed * z_mask", emb)
+        
         # z is also used to control when the encoder layer is active
         lengths = mask.long().sum(1)
 
